@@ -6,6 +6,12 @@ public class Book {
     public int pageCount;
     public boolean available = true;
 
+    public Book(String title, String author, int pageCount) {
+        this.title = title;
+        this.author = author;
+        this.pageCount = pageCount;
+    }
+
     public void displayDetails() {
         System.out.println(title + " by " + author);
         System.out.println(pageCount + " pages");
@@ -20,4 +26,6 @@ public class Book {
             System.out.println(title + " is already on loan.");
         }
     }
+
+
 }
