@@ -1,9 +1,9 @@
 package ie.atu.oop.week1;
 
 public class Book {
-    public String title;
-    public String author;
-    public int pageCount;
+    private final String title;
+    private final String author;
+    private final int pageCount;
 
     private BookStatus status;
 
@@ -41,12 +41,6 @@ public class Book {
 
     public int getPageCount() {
         return pageCount;
-    }
-
-    public enum BookStatus
-    {
-        AVAILABLE,
-        ON_LOAN
     }
 
     public BookStatus getStatus()
