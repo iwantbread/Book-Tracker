@@ -33,11 +33,31 @@ public class LibraryService {
         books.add(book);
     }
 
+    public boolean removeBook(String title) {
+        Book book = findBookByTitle(title);
+
+        if (book == null) {
+            return false;
+        }
+
+        books.remove(book);
+        return true;
+    }
+
     public int getBookCount() {
         return books.size();
     }
 
     public List<Book>getAllBooks() {
         return new ArrayList<>(books);
+    }
+
+    public Book findBookByTitle(String title) {
+        for (Book book : books) {
+            if (book.getTitle().equals(title)) {
+                return book;
+            }
+        }
+        return null;
     }
 }
