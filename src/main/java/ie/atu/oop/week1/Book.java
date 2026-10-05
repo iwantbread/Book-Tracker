@@ -26,8 +26,8 @@ public class Book {
 
         this.status = BookStatus.AVAILABLE;
 
-        this.title = title;
-        this.author = author;
+        this.title = title.trim();
+        this.author = author.trim();
         this.pageCount = pageCount;
     }
 
