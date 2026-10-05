@@ -1,7 +1,11 @@
 package ie.atu.oop.week1;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LibraryService {
     private static final int MAX_LOAN_DAYS = 14;
+    private final List<Book> books = new ArrayList<Book>();
+
     public void loanBook(Book book, int loanDays) {
         if (book == null) {
             throw new IllegalArgumentException(
@@ -19,5 +23,21 @@ public class LibraryService {
                     "Book must not be null");
         }
         book.returnBook();
+    }
+    public void addBook(Book book){
+        if (book == null) {
+            throw new IllegalArgumentException(
+                    "Book must not be null");
+        }
+
+        books.add(book);
+    }
+
+    public int getBookCount() {
+        return books.size();
+    }
+
+    public List<Book>getAllBooks() {
+        return new ArrayList<>(books);
     }
 }
