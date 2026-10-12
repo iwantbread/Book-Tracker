@@ -27,6 +27,19 @@ public class Main {
             System.out.println("Found: " + found.getTitle());
         }
 
+        System.out.println("Loan Dune: "
+                + service.loanBook("Dune", 7));
+
+        System.out.println("Dune status: " + dune.getStatus());
+
+        System.out.println("Loan missing: "
+                + service.loanBook("The Hobbit", 7));
+
+        System.out.println("Return Dune: "
+                + service.returnBook("Dune"));
+
+        System.out.println("Dune status: " + dune.getStatus());
+
         Book missing =   service.findBookByTitle("The Hobbit");
 
         if(missing == null){

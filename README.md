@@ -36,6 +36,40 @@ The 7 day instance reached the `borrowBook` method because it passed the if stat
 
 I used ChatGPT to help explain the lab instructions, Git commands, Markdown formatting and to check code and test results that I had written.
 
+
+## Lab 4 - Collections
+
+### Collections
+
+LibraryService now stores multiple books in a `List<Book>` using an ArrayList. `List<Book>` tells the compiler the list contains Book objects. The list is final, meaning it can't be replaced, but books can still be added or removed.
+
+The enhanced for loop goes through each Book in the list one at a time.
+
+### Searching and Removing
+
+`findBookByTitle()` returns the matching Book or null if it isn't found. I used `equalsIgnoreCase()` so capital letters don't matter.
+
+`removeBook()` uses the search method rather than repeating the same code.
+
+### Class Responsibilities
+
+Main creates books and displays results. LibraryService manages the collection, searches for books and checks loan durations. Book controls its own status.
+
+### Testing
+
+Three books were added successfully. Dune was found, borrowed and returned. A missing book returned false when loaning. Removing Clean Code worked the first time but returned false the second time. Final count was 2.
+
+Maven package completed with BUILD SUCCESS.
+
+### Debugger
+
+The debugger can be used to check the list size before and after adding a book and follow the search loop until a match is found or null is returned.
+
+### AI Assistance
+
+I used AI to help explain the instructions, troubleshoot errors, check my code and test results.
+
+
 ## How to Run
 
 Open the project in IntelliJ IDEA and run the `Main` class.
