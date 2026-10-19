@@ -1,53 +1,47 @@
 package ie.atu.oop.week1;
+import java.io.IOException;
+import java.nio.file.Path;
 
 public class Main {
     public static void main(String[] args) {
-        Book dune = new Book(
-                "Dune", "Frank Herbert", 412);
-        Book nineteenEightyFour = new Book(
-                "1984", "George Orwell", 328);
-        Book cleanCode = new Book(
-                "Clean Code", "Robert C. Martin", 464);
 
         LibraryService service = new LibraryService();
+        BookFileStore store = new BookFileStore(
+                Path.of("data", "books.csv"));
 
-        service.addBook(dune);
-        service.addBook(nineteenEightyFour);
-        service.addBook(cleanCode);
-
-        System.out.println("Books: " + service.getBookCount());
-
-        for (Book book : service.getAllBooks()) {
-            System.out.println(book.getTitle());
+        try {
+            for (Book book : store.load()) {
+                service.addBook(book);
+            }
+            System.out.println("Loaded: " + service.getBookCount());
+        }
+        catch (IOException ex) {
+            System.out.println("Load failed: " + ex.getMessage());
+            return;
         }
 
-        Book found = service.findBookByTitle("Dune");
+        if (service.getBookCount() == 0) {
+            Book dune = new Book("Dune", "Frank Herbert", 412);
+            Book cleanCode = new Book(
+                    "Clean Code", "Robert C. Martin", 464);
 
-        if(found != null) {
-            System.out.println("Found: " + found.getTitle());
+            service.addBook(dune);
+            service.addBook(cleanCode);
+            service.loanBook("Dune", 7);
         }
 
-        System.out.println("Loan Dune: "
-                + service.loanBook("Dune", 7));
-
-        System.out.println("Dune status: " + dune.getStatus());
-
-        System.out.println("Loan missing: "
-                + service.loanBook("The Hobbit", 7));
-
-        System.out.println("Return Dune: "
-                + service.returnBook("Dune"));
-
-        System.out.println("Dune status: " + dune.getStatus());
-
-        Book missing =   service.findBookByTitle("The Hobbit");
-
-        if(missing == null){
-            System.out.println("The Hobbit was not found");
+        for (Book book : service.getBooks()) {
+            System.out.println(
+                    book.getTitle() + " - " +
+                            book.getStatus());
         }
 
-        System.out.println("Remove Clean Code: " + service.removeBook("Clean Code"));
-        System.out.println("Remove again: " + service.removeBook("Clean Code"));
-        System.out.println("Books left: " + service.getBookCount());
+        try {
+            store.save(service.getBooks());
+            System.out.println("Saved: " + service.getBookCount());
+        }
+        catch (IOException ex) {
+            System.out.println("Save failed: " + ex.getMessage());
+        }
     }
 }
